@@ -1,4 +1,4 @@
-# TODO List Web App
+# TODO List
 
 ## 프로젝트 소개
 
