@@ -53,10 +53,12 @@ graph TD;
 
 ## 활용
 
-![TODO1](./TODO1.png){: width="300" height="450"}
-![TODO2](./TODO2.png){: width="300" height="450"}
-![TODO1](./TODO3.png){: width="300" height="450"}
-![TODO2](./TODO4.png){: width="600" height="300"}
+<img src="./TODO1.png" width= "200" height="300"/>
+<br>
+<img src="./TODO2.png" width ="200" height="300"/>
+<br>
+<img src="./TODO3.png" width ="200" height="300"/>
+<img src="./TODO4.png" width ="400" height="200"/>
 
 ## 기술 스택
 
