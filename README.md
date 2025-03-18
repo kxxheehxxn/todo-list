@@ -51,6 +51,13 @@ graph TD;
   E -->|삭제 클릭| G(할 일 삭제)
 ```
 
+## 활용
+
+![TODO1](./TODO1.png){: width="300" height="450"}
+![TODO2](./TODO2.png){: width="300" height="450"}
+![TODO1](./TODO3.png){: width="300" height="450"}
+![TODO2](./TODO4.png){: width="600" height="300"}
+
 ## 기술 스택
 
 - HTML
