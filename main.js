@@ -1,34 +1,49 @@
-const addBtn = document.querySelector('.fa-plus'); //추가 버튼
+const addBtn = document.querySelector('.fa-plus');
 const input = document.querySelector('.footer_input');
 const items = document.querySelector('.items');
 
-//li요소 생성함수
-function createItem(text) {
-  console.log(text);
+document.addEventListener('DOMContentLoaded', loadItems);
+
+function createItem(text, completed = false, time = '') {
   const itemRow = document.createElement('li');
   itemRow.className = 'item';
-  itemRow.innerHTML = `<span>${text}</span>
-          <i class="fa-solid fa-check"></i>
-          <i class="fa-solid fa-trash-can"></i>
-          </li>`;
+  if (completed) itemRow.classList.add('item_done');
 
-  //체크버튼 클릭시 클래스 추가 이벤트
+  itemRow.innerHTML = `
+    <span class="text">${text}</span>
+    <span class="time">${time}</span>
+    <i class="fa-solid fa-check"></i>
+    <i class="fa-solid fa-trash-can"></i>
+  `;
+
   itemRow.querySelector('.fa-check').addEventListener('click', () => {
     itemRow.classList.toggle('item_done');
+    const now = new Date().toLocaleTimeString();
+    itemRow.querySelector('.time').textContent = itemRow.classList.contains(
+      'item_done'
+    )
+      ? now
+      : '';
+    saveItems();
   });
 
-  //삭제 버튼 클릭 시 itemRow 제거 이벤트
   itemRow.querySelector('.fa-trash-can').addEventListener('click', () => {
     itemRow.remove();
+    saveItems();
   });
 
-  //   setTimeout(() => itemRow.scrollIntoView({ block: 'center' }), 0);
-  requestAnimationFrame(() => itemRow.scrollIntoView({ block: 'center' }));
+  itemRow.querySelector('.text').addEventListener('click', () => {
+    const newText = prompt('할 일을 수정하세요', text);
+    if (newText) {
+      itemRow.querySelector('.text').textContent = newText;
+      saveItems();
+    }
+  });
 
+  requestAnimationFrame(() => itemRow.scrollIntoView({ block: 'center' }));
   return itemRow;
 }
 
-//추가함수
 function onAdd() {
   const text = input.value.trim();
   if (!text) {
@@ -36,20 +51,27 @@ function onAdd() {
     input.focus();
     return;
   }
-
-  //li 생성하는 함수 - createItem()
-  //ul애 생성값을 추가함
-
   items.appendChild(createItem(text));
   input.value = '';
   input.focus();
+  saveItems();
 }
-addBtn.addEventListener('click', onAdd);
-// input.addEventListener('keypress', (e) => {
-//   console.log(e);
-//   if (e.key === 'Enter') {
-//     onAdd();
-//   }
-// });
 
+function saveItems() {
+  const data = [...document.querySelectorAll('.item')].map((item) => ({
+    text: item.querySelector('.text').textContent,
+    completed: item.classList.contains('item_done'),
+    time: item.querySelector('.time').textContent,
+  }));
+  localStorage.setItem('todoList', JSON.stringify(data));
+}
+
+function loadItems() {
+  const data = JSON.parse(localStorage.getItem('todoList')) || [];
+  data.forEach(({ text, completed, time }) => {
+    items.appendChild(createItem(text, completed, time));
+  });
+}
+
+addBtn.addEventListener('click', onAdd);
 input.addEventListener('keyup', (e) => e.key === 'Enter' && onAdd());
