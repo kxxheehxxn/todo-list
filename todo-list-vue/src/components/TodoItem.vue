@@ -1,3 +1,7 @@
+<script setup>
+defineProps(['item']);
+</script>
+
 <template>
   <li :class="['item', { item_done: item.completed }]">
     <span
@@ -13,14 +17,10 @@
   </li>
 </template>
 
-<script setup>
-defineProps(['item']);
-</script>
-
 <style scoped>
 .item {
   display: flex;
-  justify-content: space-between; /* 아이템과 아이콘을 양 끝으로 분배 */
+  justify-content: space-between;
   padding: 1rem 1.5rem;
   font-size: 1.5rem;
   border-bottom: 1px solid lightgray;
@@ -31,11 +31,10 @@ defineProps(['item']);
   text-decoration: line-through;
 }
 
-/* .icons 클래스로 아이콘들을 묶어서 오른쪽에 정렬 */
 .icons {
   display: flex;
   justify-content: flex-end;
-  gap: 10px; /* 아이콘 간의 간격 */
+  gap: 10px;
 }
 
 .fa-check,

@@ -1,3 +1,15 @@
+<script setup>
+import { ref } from 'vue';
+const newTodo = ref('');
+const emit = defineEmits(['add']);
+const addNewItem = () => {
+  if (newTodo.value.trim()) {
+    emit('add', newTodo.value.trim());
+    newTodo.value = '';
+  }
+};
+</script>
+
 <template>
   <footer class="footer">
     <input
@@ -11,18 +23,6 @@
   </footer>
 </template>
 
-<script setup>
-import { ref } from 'vue';
-const newTodo = ref('');
-const emit = defineEmits(['add']);
-const addNewItem = () => {
-  if (newTodo.value.trim()) {
-    emit('add', newTodo.value.trim());
-    newTodo.value = '';
-  }
-};
-</script>
-
 <style scoped>
 .footer {
   display: flex;
@@ -34,12 +34,12 @@ const addNewItem = () => {
     rgba(127, 188, 242, 1) 100%
   );
   border-radius: 0 0 20px 20px;
-  padding: 15px; /* padding을 키워줌 */
+  padding: 15px;
 }
 .footer_input {
   width: 80%;
   border: none;
-  font-size: 2rem; /* 폰트 크기 키움 */
+  font-size: 2rem;
   padding: 1rem;
   border-bottom: 2px solid #ccc;
   outline: none;
@@ -55,7 +55,7 @@ const addNewItem = () => {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 2rem; /* 아이콘 크기 키움 */
+  font-size: 2rem;
   background-color: black;
   border-radius: 0 20px 20px 0;
   color: white;

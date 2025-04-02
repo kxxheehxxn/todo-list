@@ -1,20 +1,3 @@
-<template>
-  <div class="container">
-    <header class="header">TODO LIST</header>
-    <ul class="items">
-      <TodoItem
-        v-for="(item, index) in todos"
-        :key="index"
-        :item="item"
-        @toggle="toggleDone(index)"
-        @remove="removeItem(index)"
-        @edit="editItem(index, $event)"
-      />
-    </ul>
-    <TodoInput @add="addItem" />
-  </div>
-</template>
-
 <script setup>
 import { ref, onMounted, watch } from 'vue';
 import TodoItem from '@/components/TodoItem.vue';
@@ -49,19 +32,36 @@ watch(
 );
 </script>
 
+<template>
+  <div class="container">
+    <header class="header">TODO LIST</header>
+    <ul class="items">
+      <TodoItem
+        v-for="(item, index) in todos"
+        :key="index"
+        :item="item"
+        @toggle="toggleDone(index)"
+        @remove="removeItem(index)"
+        @edit="editItem(index, $event)"
+      />
+    </ul>
+    <TodoInput @add="addItem" />
+  </div>
+</template>
+
 <style scoped>
 .container {
-  width: 90%; /* 화면 크기를 키우기 위해 넓혀줌 */
-  max-width: 600px; /* 최대 너비를 늘려줌 */
+  width: 90%;
+  max-width: 600px;
   margin: 50px auto;
   background-color: #f1f0f7;
   box-shadow: 9px 11px 5px rgba(125, 124, 125, 1);
   border-radius: 20px;
-  padding: 2rem; /* padding을 늘려서 여백을 크게 */
+  padding: 2rem;
 }
 .header {
-  padding: 2rem; /* padding을 늘려서 더 넓은 헤더 */
-  font-size: 2rem; /* 폰트 크기 키움 */
+  padding: 2rem;
+  font-size: 2rem;
   text-align: center;
   background: linear-gradient(
     166deg,
@@ -71,8 +71,8 @@ watch(
   border-radius: 20px 20px 0 0;
 }
 .items {
-  padding: 2rem; /* 아이템 여백을 늘려줌 */
-  max-height: 500px; /* 최대 높이 키움 */
+  padding: 2rem;
+  max-height: 500px;
   overflow-y: auto;
 }
 </style>
